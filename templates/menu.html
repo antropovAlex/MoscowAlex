@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Настроить фильтрацию</h1>
+
+<script>
+    function Menu() {
+        var past = "{{ past }}";
+        window.location.assign(past);
+    }
+</script>
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.category(class="form-control", placeholder="Тип дома") }}<br>
+        {% for error in form.category.errors %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.design(class="form-control", placeholder="Дизайн дома") }}<br>
+        {% for error in form.design.errors %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.floor(class="form-control", placeholder="Этажность") }}<br>
+        {% for error in form.floor.errors %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.purpose(class="form-control", placeholder="Назначение") }}<br>
+        {% for error in form.purpose.errors %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.square(class="form-control", placeholder="Площадь дома") }}<br>
+        {% for error in form.square.errors %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.state(class="form-control", placeholder="Состояние дома") }}<br>
+        {% for error in form.state.errors %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endfor %}
+    </p>
+    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+    <div>{{ message }}</div>
+</form>
+{% for i in ad %}
+<div class="feed">
+    <div id="carouselExampleIndicators{{ loop.index }}" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            {% for image in i["photo"] %}
+                <li data-target="#carouselExampleIndicators{{ loop.index }}" data-slide-to="{{ loop.index0 }}" class="{% if loop.index0 == 0 %}active{% endif %}"></li>
+            {% endfor %}
+        </ol>
+        <div class="carousel-inner">
+            {% for image in i["photo"] %}
+                <div class="carousel-item {% if loop.index0 == 0 %}active{% endif %}">
+                    <img class="d-block w-100 img-fluid" src="{{ url_for('static', filename='img/' + image) }}" alt="Slide {{ loop.index }}">
+                </div>
+            {% endfor %}
+        </div>
+
+        <a class="carousel-control-prev" href="#carouselExampleIndicators{{ loop.index }}" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators{{ loop.index }}" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <h1>{{ i["name"] }}</h1>
+</div>
+{% endfor %}
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}

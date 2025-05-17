@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <button class="class" onclick="Menu()">☰</button>
+    <button class="new" onclick="NewAd()">Новое объявление</button>
+    <button class="regist" id="openModal" onclick="Me()">{{name.replace("_", " ")}}</button>
+</div>
+<script>
+    function NewAd() {
+        window.location.assign('/new_ad');
+    }
+
+    function Menu() {
+        window.location.assign('/menu');
+    }
+</script>
+<!-- Begin page content -->
+{% block content %}{% endblock %}
+</body>
+</html>
